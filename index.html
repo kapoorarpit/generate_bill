@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0); /* Fully transparent container */
+            padding: 20px;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent table */
+            box-sizing: border-box;
+            border: 1px solid #ddd; /* Border around the entire table */
+        }
+        th, td {
+            padding: 6px 8px;  /* Reduced padding for compactness */
+            text-align: left;
+            color: #000; /* Text stays solid */
+            box-sizing: border-box; /* Ensure padding is included in width */
+            border: 1px solid #ddd; /* Border around each cell */
+            font-size: 14px; /* Reduced font size */
+        }
+        th {
+            background-color: rgba(255, 255, 255, 0.5); /* Slightly more opaque for header */
+        }
+        input[type="text"] {
+            width: 100%;
+            min-width: 120px; /* Reduced minimum width for input */
+            padding: 6px;  /* Reduced padding */
+            box-sizing: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent input */
+            color: #000;
+            word-wrap: break-word; /* Allow long words to wrap within the box */
+            white-space: normal; /* Ensure text can wrap */
+            font-size: 14px; /* Match font size of table cells */
+        }
+        /* Set width for the first column to take 50% less space */
+        td:first-child, th:first-child {
+            width: 5%; /* Reduced width to 50% of its original size */
+        }
+        .action-btns {
+            text-align: center;
+            margin-top: 10px;  /* Add some margin at the top for the buttons */
+        }
+        .add-row-btn, .print-btn, .delete-btn {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .add-row-btn:hover, .print-btn:hover, .delete-btn:hover {
+            background-color: rgba(0, 86, 179, 0.8);
+        }
+        .delete-btn {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+
+        /* Hide Action Column and Buttons for Print */
+        @media print {
+            body {
+                margin: 0;
+                background: url('background.png');
+                background-size: cover !important;
+            }
+            .container {
+                margin: 0;
+                box-shadow: none;
+                padding: 20px;
+                margin-top: 320px; /* Adjust this value to move the content down */
+            }
+            /* Hide action buttons during print */
+            .add-row-btn, .print-btn, .delete-btn {
+                display: none; /* Hide the add row, print and delete buttons */
+            }
+            /* Hide Action column (last column) */
+            th:last-child, td:last-child {
+                display: none; /* Hide the last column (Action column) */
+            }
+
+            /* Ensure the table doesn't overflow */
+            table {
+                width: 100%; /* Ensure table takes full width of printable area */
+                max-width: 95%; /* Prevent stretching beyond the page */
+                padding: 10px; /* Add padding to the right of the table */
+                box-sizing: border-box; /* Ensure padding is included in width */
+                border: 1px solid #ddd; /* Border for the whole table */
+            }
+
+            /* Remove borders from th and td */
+            th, td {
+                padding: 10px; /* Ensure cells have enough padding */
+                text-align: left;
+                border: 1px solid #ddd; /* Add border to each cell */
+                box-sizing: border-box; /* Include padding in width/height */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+            <div class="form-inputs" style="display: flex; margin-bottom: 15px; width: 95%;">
+                <label style="width: 7%; font-size: 14px; padding: 8px 0;">नाम श्री</label>
+                <input type="text"  style="width: 46%; padding: 8px; margin-right: 45px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                <label style="width: 8%; font-size: 14px; padding: 8px 0;">दिनांक</label>
+                <input type="text" style="width: 46%; padding: 8px; margin-right: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+            </div>
+            <div class="form-inputs" style="display: flex; margin-bottom: 15px; width: 95%;">
+                <label style="width: 6%; font-size: 14px; padding: 8px 0;">पता</label>
+                <textarea  style="width: 95%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;"></textarea>
+            </div>       
+        <table id="billing-table">
+            <thead>
+                <tr>
+                    <th>क.स.</th>
+                    <th>विवरण</th>
+                    <th>वजन</th>
+                    <th>दर/भाव</th>
+                    <th>कुल कीमत</th>
+                    <th>Action</th> <!-- New column for delete button -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td> <!-- Delete button -->
+                </tr>
+            </tbody>
+        </table>
+        <div class="action-btns">
+            <button class="add-row-btn" onclick="addRow()">Add Row</button>
+            <button class="print-btn" onclick="window.print()">Print</button>
+        </div>
+    </div>
+
+    <script>
+        function addRow() {
+            const table = document.getElementById('billing-table').getElementsByTagName('tbody')[0];
+            const rowCount = table.rows.length;
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td> <!-- Delete button -->
+            `;
+        }
+
+        function deleteRow(button) {
+            const row = button.closest('tr'); // Find the closest row of the clicked button
+            row.parentNode.removeChild(row); // Remove the row
+        }
+    </script>
+</body>
+</html>
