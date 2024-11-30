@@ -34,6 +34,17 @@
             box-sizing: border-box;
             border: 2px solid #000; /* Thicker table border */
         }
+        table input[type="text"] {
+            width: 100%;
+            padding: 6px 8px;
+            border: none;          /* Remove borders */
+            background: none;      /* Remove background */
+            color: #000;           /* Keep the text color black */
+            font-size: 14px;       /* Keep consistent font size */
+            font-weight: bold;     /* Bold text */
+            outline: none;         /* Remove the blue outline on focus */
+            box-shadow: none;      /* Remove any shadows */
+        }
         th, td {
             padding: 6px 8px;
             text-align: left;
@@ -48,14 +59,15 @@
         }
         input[type="text"], textarea {
             width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 2px solid #000; /* Thicker border for input */
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.5);
+            padding: 6px 8px;
+            border: none;
+            border-bottom: 2px solid #000;  /* Bottom border only */
+            background: none;
             color: #000;
-            font-weight: bold;
             font-size: 14px;
+            font-weight: bold;
+            outline: none;
+            box-shadow: none;
         }
         td:first-child, th:first-child {
             width: 7%;
@@ -163,15 +175,14 @@
         </div>
         <br><br><br>
         <div class="form-inputs" style="display: flex; margin-bottom: 15px; width: 95%;">
-            <label style="font-size: 14px; padding: 8px 0; margin-right: 39%;">सोने के जेवर की वापसी 9% है।</label>
+            <label style="font-size: 14px; padding: 8px 0; margin-right: 35%;">सोने के जेवर की वापसी 90% है।</label>
             <label style="width: 6%; font-size: 14px; padding: 8px 0; margin-right: 2px;">योग</label>
             <input type="text" style="width: 30%; padding: 8px;">
         </div> 
-        <label style="font-size: 14px; padding: 8px 0; margin-right: 65%;">भूल-चूक लेनी देनी।</label>
+        <label style="font-size: 14px; padding: 8px 0; margin-right: 64%;">भूल-चूक लेनी देनी।</label>
         <label style="width: 6%; font-size: 14px; padding: 8px 0; margin-right: 10px;">वास्ते- जागेन्द्र ज्वैलर्स</label>
         <br><br>
-        <label style="font-size: 14px; padding: 8px 0; margin-right: 32%;">ह. क्रेता</label>
-        <label style="width: 6%; font-size: 14px; padding: 8px 0; margin-right: 32%;">पीलें झंडे वाली दुकान</label>
+        <label style="font-size: 14px; padding: 8px 0; margin-right: 80%;">ह. क्रेता</label>
         <label style="width: 6%; font-size: 14px; padding: 8px 0; margin-right: 10px;">अधिकृत ह.</label>
     </div>
 
