@@ -51,8 +51,12 @@
             color: #000;
             font-weight: bold; /* Bold text in table */
             box-sizing: border-box;
-            border: 2px solid #000; /* Thicker cell border */
             font-size: 14px;
+            border-left: 2px solid #000; /* Add only vertical lines */
+            border-right: 2px solid #000; /* Add only vertical lines */
+            border-top: none; /* Remove horizontal lines */
+            border-bottom: none; /* Remove horizontal lines */
+
         }
         th {
             background-color: rgba(255, 255, 255, 0.5);
